@@ -1,0 +1,116 @@
+<div class="btn-container d-flex ps-4 ">
+    <button class="btn btn-primary btn-lg my-4 my-sm-0" [routerLink]="['/admin-panel']">
+  <i class="fas fa-arrow-left me-2"></i> Go Back
+  </button>
+    <!-- Add spacing between buttons -->
+    <div class="ms-2"></div>
+    <button class="btn btn-success btn-lg my-4 my-sm-0 " data-bs-toggle="modal" data-bs-target="#createProductModal" (click)="save()">Add Product</button>
+
+</div>
+<!-- Search button -->
+<div class="search-bar-container ms-4">
+    <div class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search for a product..." aria-label="Search" [(ngModel)]="searchTerm" (input)="searchProducts()">
+        <button class="btn btn-success" type="submit" (click)="searchProducts()">Search</button>
+
+        <!---we can use input property also to search products with keypress(input)="searchProducts()-->
+    </div>
+
+</div>
+
+
+<div class="container mt-2">
+    <!-- Product Table -->
+    <table class="table table-hover table-stripped table-responsive">
+        <thead>
+            <tr>
+                <th>Product Title</th>
+                <th>Product Description</th>
+                <th>Product Price</th>
+                <th>Product Stock</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="products?.length !== 0">
+            <tr *ngFor="let product of products">
+                <td>{{ product.title }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.price | currency:'kr ':'symbol':'1.2-2' }}</td>
+                <td>{{ product.stock }}</td>
+                <td>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#updateProductModal" (click)="edit(product)">
+                          <i class="fas fa-edit text-primary" style="font-size: 20px;"></i>
+                      </button>
+                    <button type="button" (click)="delete(product)">
+                          <i class="fas fa-trash text-danger" style="font-size: 20px;"></i>
+                      </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal for updating a product -->
+<div class="modal" id="updateProductModal" tabindex="-1" aria-labelledby="updateCategoryLabel" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Update Product</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label>Title<input [(ngModel)]="product.title" class="form-control" id="title" name="title" placeholder="Enter product title"></label>
+                        <label>Description<input [(ngModel)]="product.description" class="form-control" id="description" name="description" placeholder="Enter product description"></label>
+                        <label>Price<input [(ngModel)]="product.price" class="form-control" id="price" name="price" placeholder="Enter product price"></label>
+                        <label>Stock<input [(ngModel)]="product.stock" class="form-control" id="stock" name="stock" placeholder="Enter product stock"></label>
+                        <label>Category ID<input [(ngModel)]="product.categoryId" class="form-control" id="categoryId" name="categoryId" placeholder="Enter category ID"></label>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" (click)="save()">Update</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" (click)="cancel()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for creating a new product -->
+<div class="modal" id="createProductModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Create New Product</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label>Title <input [(ngModel)]="product.title" class="form-control" id="title" name="title" placeholder="enter product title"></label>
+                        <label>description<input [(ngModel)]="product.description" class="form-control" id="description" name="description" placeholder="enter product description"></label>
+                        <label>Image <input type="file" (change)="onFileChange($event)" class="form-control" id="image" name="image" placeholder="enter product image"></label>
+                        <label>Price <input [(ngModel)]="product.price" class="form-control" id="price" name="price" placeholder="enter product price"></label>
+                        <label>Stock <input [(ngModel)]="product.stock" class="form-control" id="stock" name="stock" placeholder="enter product stock"></label>
+                        <!--   <label>Category ID <input [(ngModel)]="product.categoryId" class="form-control" id="categoryId" name="categoryId" placeholder="enter categoryId"></label>
+                       list of categories in your component -->
+                        <label>Category Name
+                      <select [(ngModel)]="product.categoryId" class="form-control" id="categoryId" name="categoryId">
+  <option *ngFor="let category of categories"  [value]="category.id">{{ category.categoryName }}</option>
+</select>
+</label>
+
+                    </div>
+                    <br>
+                    <button (click)="save()" type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" [disabled]="!product.title">Create</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button (click)="cancel()" type="button" class="btn btn-warning">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

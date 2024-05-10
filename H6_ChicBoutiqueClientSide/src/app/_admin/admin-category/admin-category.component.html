@@ -1,0 +1,105 @@
+<div class="btn-container d-flex ps-4 ">
+    <button class="btn btn-primary btn-lg my-4 my-sm-0" [routerLink]="['/admin-panel']">
+  <i class="fas fa-arrow-left me-2"></i> Go Back
+  </button>
+    <!-- Add spacing between buttons -->
+    <div class="ms-2"></div>
+    <button class="btn btn-success btn-lg my-4 my-sm-0 " data-bs-toggle="modal" data-bs-target="#createCategoryModal" (click)="save()">Add Category</button>
+</div>
+<!-- Search button -->
+<div class="search-bar-container ms-4">
+    <div class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search for a category..." aria-label="Search" [(ngModel)]="searchTerm" (input)="searchCategory()">
+        <button class="btn btn-success" type="submit" (click)="searchCategory()">Search</button>
+
+    </div>
+
+</div>
+
+<!----Category table ---->
+<div class="container mt-2">
+    <table class="table table-hover table-stripped table-responsive">
+        <thead>
+            <tr>
+                <th> Category Name </th>
+
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="categories?.length != 0">
+            <tr *ngFor="let category of categories">
+                <td> {{category.categoryName}}</td>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#updateCategoryModal" (click)="edit(category)">
+                  <i class="fas fa-edit text-primary" style="font-size: 20px;"></i></button>
+                <button style="width: 47px;" (click)="delete(category)"><i class="fas fa-trash text-danger" style="font-size: 20px;"></i></button>
+
+            </tr>
+
+
+
+        </tbody>
+    </table>
+</div>
+
+
+
+<div class="modal " id="updateCategoryModal" tabindex="-1" aria-labelledby="updateCategoryLabel" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title " id="exampleModalLabel">Update Category</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <input [(ngModel)]="category.categoryName" class="form-control" id="name" name="name" placeholder="enter category name">
+                    </div>
+
+                    <button (click)="save()" type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Update</button>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button (click)="cancel()" type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal " id="createCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title " id="exampleModalLabel">CREATE NEW Category</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <br>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <input [(ngModel)]="category.categoryName" class="form-control" id="name" name="name" placeholder="enter category name">
+                    </div>
+                    <br>
+
+                    <button (click)="save()" type="button" class="btn btn-primary btn-lg" data-dismiss="modal" [disabled]="!category.categoryName">Create</button>
+                    <p id="user_message_cat" [hidden]="category.categoryName">
+                        <span style="font-size:0.8em; color: red;">*field required</span>
+                    </p>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button (click)="cancel()" type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

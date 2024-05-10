@@ -1,6 +1,6 @@
-ChicBoutique
+ChicBotique
 
-ChicBoutique is a web application that combines ASP.NET Core with Entity Framework on the backend and Angular 14 with Bootstrap 5 on the frontend.
+ChicBotique is a web application that combines ASP.NET Core with Entity Framework on the backend and Angular 14 with Bootstrap 5 on the frontend.
 
 Technologies Used
   •	ASP.NET Core

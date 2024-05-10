@@ -1,0 +1,99 @@
+/* styles */
+
+.logo {
+    width: 180px;
+    border: solid rgb(6, 7, 8);
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.1em;
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+
+button {
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 100%;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 18px;
+}
+
+button:hover i,
+.box:hover i {
+    color: rgb(162, 163, 163);
+}
+
+.box {
+    width: 350px;
+    height: 50px;
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+}
+
+.box>input {
+    flex: 1;
+    height: 40px;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    padding-left: 10px;
+}
+
+
+/* Define a custom class for spacing */
+
+.custom-button {
+    width: 100px;
+    /* Adjust the width as needed */
+}
+
+.custom-spacing {
+    margin-top: 10px;
+    margin-right: 0.8rem;
+    cursor: pointer;
+    /* Adjust the margin-top value as needed */
+}
+
+
+/* Apply flexbox layout for mobile screens */
+
+@media (max-width: 768px) {
+    .nav-item {
+        display: flex;
+        align-items: center;
+    }
+    .seach-bar-container {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+        /* Adjust margin as needed */
+    }
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    /* Position at the bottom of the viewport */
+    left: 0;
+    /* Positionat the left side of the viewport */
+    width: 100%;
+    /* Make it full-width */
+    height: 80px;
+    background-color: #333;
+    /* background color */
+    color: white;
+    /*  text color */
+    padding: 5px;
+    /* Add padding for content */
+}

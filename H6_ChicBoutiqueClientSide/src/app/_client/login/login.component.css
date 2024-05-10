@@ -1,0 +1,24 @@
+     /* Center the login form vertically */
+
+     .container {
+         padding-top: 100px;
+         justify-content: right;
+         align-items: center;
+         min-height: 100vh;
+     }
+
+     .card {
+         border: 2px solid #050708;
+         /*border style */
+         border-radius: 10px;
+         /* Rounded corners */
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+         /* Box shadow for depth */
+         transition: transform 0.2s;
+         /* transition for a hover effect */
+     }
+
+     .card:hover {
+         transform: scale(1.05);
+         /* Enlarge the card on hover */
+     }

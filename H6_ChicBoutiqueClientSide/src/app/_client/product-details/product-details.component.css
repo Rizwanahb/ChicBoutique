@@ -1,0 +1,27 @@
+/* Center the card vertically */
+
+.container {
+    padding-top: 100px;
+    justify-content: right;
+    align-items: center;
+    min-height: 100vh;
+    /* For screens smaller than 768px (typical mobile size) */
+    @media (max-width: 767px) {
+        padding-top: 5px;
+        /* Adjust the padding value for mobile screens as desired */
+        margin-top: 5px;
+        min-height: auto;
+        /* If you want to remove the minimum height on mobile screens */
+    }
+}
+
+.card {
+    border: 2px solid #3498db;
+    /* Add your desired border style */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Box shadow for depth */
+    transition: transform 0.2s;
+    /* Add a transition for a hover effect */
+}

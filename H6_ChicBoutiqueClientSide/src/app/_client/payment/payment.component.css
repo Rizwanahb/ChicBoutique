@@ -1,0 +1,7 @@
+.card-container {
+    margin-bottom: 100px;
+    z-index: 1;
+    overflow: auto;
+    /* Set a z-index value */
+    /* value based on footer's height to create a space*/
+}

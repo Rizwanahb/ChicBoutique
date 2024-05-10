@@ -1,0 +1,11 @@
+<div class="container-fluid">
+    <div class="row">
+        <ng-container *ngFor="let item of products">
+            <div class="card col-md-2">
+                <a routerLink="/product_details/{{item.id}}"><img src="/assets/image/{{item.image}}" alt="picture of products"></a>
+                <h5 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;max-width: 100ch;">{{item.title}}</h5>
+
+            </div>
+        </ng-container>
+
+    </div>

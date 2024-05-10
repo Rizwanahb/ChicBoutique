@@ -1,0 +1,7 @@
+<!------Navbar (Always displayed in all pages)----->
+<app-navbar></app-navbar>
+<!-----Application content including the route outlet for dynamic content-<app-profile></app-profile>------>
+<router-outlet></router-outlet>
+<!-- <app-profile></app-profile> -->
+<!-- Only show these components when the specific routes are active-->
+<app-frontpage *ngIf="isFrontpageRoute()"></app-frontpage>

@@ -1,0 +1,108 @@
+<!-- Navbar  Navigation--->
+<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top ">
+    <div class="container-fluid">
+        <a class="navbar-brand d-lg-none" href="/frontpage">
+            <img class="logo rounded-circle " style="width: 100px; align-items: flex-start;" src="assets/image/logo3.png">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <!-- Left side nav menu items  -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <!-- Home will be hidden on screens "sm" and smaller (mobile) -->
+                    <div class="nav-link d-none d-sm-block" style="font-size:20px " routerLink="" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Home"> <i class="nav-item" style="font-size:25px" class="fas fa-home"></i></div>
+                </li>
+                <li class="nav-item " *ngFor="let category of categories ">
+                    <div class="nav-link" style="font-size:20px " routerLink="/category_products/{{category.id}}">{{category.categoryName}}</div>
+                </li>
+
+            </ul>
+
+            <!--Logo Placement in center of the navbar-->
+
+            <a class="navbar-brand d-none d-lg-block  mx-auto" href="/frontpage">
+                <img class="logo rounded-circle" src="assets/image/logo3.png">
+            </a>
+
+
+
+
+            <!--Right side nav menu items-->
+            <ul class="navbar-nav ">
+                <!--Search bar to filter products-->
+
+                <li class="nav-item">
+                    <div class="box">
+                        <i style="font-size:25px" class="fas fa-search "></i>
+                        <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="onSearch($event)" routerLink="" placeholder="Search">
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <button class="nav-link" class="btn btn-outline--success" style="display:inline-block" *ngIf="checkIfUserAdmin(currentUser)" routerLink="/admin-panel">
+                      <i class="fas fa-dashboard" style="font-size:25px" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Admin Dashboard" ></i></button>
+                </li>
+                <!-- Dropdown list for logout and profile-->
+                <li class="nav-item" *ngIf="currentUser != null">
+                    <div class="dropdown">
+                        <button class="nav-link dropdown-toggle custom-button" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fas -solid fa-user me-2 fs-1" ></i>
+                          <span>{{currentUser.firstName}}</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" *ngIf="checkIfUserMember(currentUser)" routerLink="/profile">
+                                <i class="fas fa-user-cog me-2"></i>Profile
+                            </a>
+                            <span class="dropdown-item custom-spacing" (click)="logout()">
+                              <i class="fas fa-sign-out-alt me-2"></i>Logout
+                            </span>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Only show the  login and Register form when the user is not logged in -->
+                <!-- Dropdown list for login and Register-->
+                <li class="nav-item" *ngIf="currentUser == null">
+                    <div class="dropdown" (mouseenter)="isHovered = true" (mouseleave)="isHovered = false">
+                        <button class="nav-link " [attr.aria-haspopup]="isHovered ? true : null" [attr.aria-expanded]="isHovered ? true : null">
+                    <i style="font-size: 25px" class="fas fa-user"></i>
+                  </button>
+                        <div class="dropdown-menu" [ngClass]="{'show': isHovered}" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" routerLink="/login">
+                                <i class="fas fa-sign-in-alt me-2"></i>Login
+                            </a>
+                            <a class="dropdown-item custom-spacing" routerLink="/register">
+                                <i class="fas fa-user-plus me-2"></i>Register
+                            </a>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="nav-item">
+                    <button routerLink="/wishlist" class="btn " data-bs-toggle="tooltip" data-bs-placement="bottom" title="Wishlist">
+                     <i style="font-size:25px" class="fas -solid fa-heart text-danger"></i>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button routerLink="/cart" class="btn" data-bs-toggle="tooltip" data-bs-placement="bottom" title="ShoppingCart">
+                      <i style="font-size:25px" class="fas fa-cart-plus"></i>
+                      <div style="font-size: 10px;" class="badge bg-warning"> {{totalItem}}</div>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+<div class="footer sticky ">
+    <!--fixed-bottom laver footer sticky på bunden -->
+    <p>ChicBoutique WebShop &copy;2024. All rights reserved.<br>CVR-1234656</p>
+    <a href="mailto:webshopsupport@abc.com">webshopsupport@abc.com</a>
+</div>

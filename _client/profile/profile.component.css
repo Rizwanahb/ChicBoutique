@@ -1,0 +1,28 @@
+.container {
+    padding-top: 100px;
+    justify-content: right;
+    /*  min-height: 100vh;*/
+}
+
+.button-container {
+    margin-top: 20px;
+    /* */
+}
+
+.custom-input-group input {
+    margin-right: 10px;
+    /* Adjust the value as needed */
+}
+
+@keyframes fadeInOut {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade {
+    animation: fadeInOut 0.3s ease-in-out;
+}

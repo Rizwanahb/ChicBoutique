@@ -1,0 +1,65 @@
+<!-- Carousel -->
+<div id="demo" class="carousel slide container-fluid" data-bs-ride="carousel">
+
+    <!-- Indicators/dots -->
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+    </div>
+
+    <!-- The slideshow/carousel -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src=".\assets\image\shop.jpg" alt="bg1" class="d-block w-100 carousel-image">
+            <div class="carousel-caption">
+                <h2>ChicBotique</h2>
+                <p>Where Trends Come to Life!</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src=".\assets\image\shirts-rack.jpg" alt="Clothes-hang-shelf" class="d-block w-100 carousel-image">
+        </div>
+        <div class="carousel-item ">
+            <img src=".\assets\image\little-girl-shopping.jpg" alt="girl-shopping" class="d-block w-100 carousel-image">
+        </div>
+    </div>
+
+    <!-- Left and right controls/icons -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+<!--Sort by price--->
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <label for="sort-select">Price:</label>
+        <select id="sort-select" class="form-control" (change)="sortProducts($event)">
+        <option value="none">Sort by Price</option>
+        <option value="asc" >Lowest Price</option>
+        <option value="desc" >Highest Price</option>
+    </select>
+    </div>
+</div>
+<!--List of Products showing in Cards-->
+
+
+<div class="list row justify-content-center" id="search-results-section">
+    <div class=" card border my-3 custom-card " *ngFor="let item of products|  sort:sortCriteria:sortDirection">
+        <img src="/assets/image/{{item.image}} " class="card-img-top " alt="{{item.title}} ">
+        <div class="card-body ">
+            <h4 class="card-title text-center ">{{item.title}}</h4>
+            <p class="card-text ">Description: {{item.description}}</p>
+            <p class="card-text ">Price: {{item.price}}</p>
+        </div>
+        <div class="card-footer bg-transparent text-center ">
+            <a class="btn btn-success " routerLink="/product_details/{{item.id}} ">View Details</a>
+        </div>
+    </div>
+    <!--to create a space between cards and footer-->
+    <div class="card-container "></div>
+</div>

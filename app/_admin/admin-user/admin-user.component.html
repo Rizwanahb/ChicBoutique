@@ -1,0 +1,209 @@
+<div class="btn-container d-flex ps-4 ">
+    <button class="btn btn-primary btn-lg my-4 my-sm-0" [routerLink]="['/admin-panel']">
+    <i class="fas fa-arrow-left me-2"></i> Go Back
+    </button>
+    <!----->
+
+</div>
+<div class="container mt-3">
+    <!-- Display users based on search -->
+    <div *ngIf="searched && users.length > 0; else noResults">
+
+        <table class="table table-hover table-stripped table-responsive">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Address </th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.homeAddress?.address }}</td>
+                    <td>{{ getRoleName(user.role) }}</td>
+                    <!-- Display role name based on role number -->
+                    <td>
+                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#orderDetailsModal" onclick="">
+                      <u>Check Order details</u>
+                  </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Display message if no results found -->
+    <ng-template #noResults>
+        <p *ngIf="searchTerm && searched" class="text-danger">No results found.</p>
+    </ng-template>
+
+</div>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <h5><b>Choose Role:</b></h5>
+            <div class="input-group mb-3">
+                <select class="form-select" [(ngModel)]="selectedValue" (change)="onRoleChange($event)">
+                 <option value="0">All</option>
+              <option value="1">Administrators</option>
+              <option value="2">Members</option>
+              <option value="3">Guests</option>
+            </select>
+                <!-- Search button -->
+                <div class="col-md-6 search-bar-container ms-4">
+                    <div class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search for a user..." [(ngModel)]="searchTerm" (input)=" searchUser() ">
+                        <button class="btn btn-success " type="submit " (click)="searchUser() ">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!---Table to show user data according to role-->
+    <br>
+    <div class="table ">
+        <div class="container mt-2 ">
+            <table class="table table-hover table-stripped table-responsive ">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Order</th>
+                    </tr>
+                </thead>
+
+                <!-- Display role-specific tables -->
+                <tbody *ngIf="(selectedValue==='0' ) && (users$ | async) as users ">
+                    <!-- All Users Table -->
+                    <tr *ngFor="let user of users ">
+                        <td>{{ user.firstName }}</td>
+                        <td>{{ user.lastName }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.homeAddress?.address}}</td>
+
+
+                        <td>
+                            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#orderDetailsModal">
+                            <u>Check Order details</u>
+                        </button>
+                        </td>
+                    </tr>
+                </tbody>
+
+                <tbody *ngIf="(selectedValue==='1' ) && (users$ | async) as admins ">
+                    <!-- Admins Table -->
+                    <tr *ngFor="let admin of admins ">
+                        <td>{{ admin.firstName }}</td>
+                        <td>{{ admin.lastName }}</td>
+                        <td>{{ admin.email }}</td>
+                        <td>{{ admin.homeAddress?.address}}</td>
+                        <td>
+                            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#orderDetailsModal">
+                            <u>Check Order details</u>
+                        </button>
+                        </td>
+                    </tr>
+                </tbody>
+
+                <tbody *ngIf="(selectedValue==='2' ) && (users$ | async) as members ">
+                    <!-- Members Table -->
+                    <tr *ngFor="let member of members ">
+                        <td>{{ member.firstName }}</td>
+                        <td>{{ member.lastName }}</td>
+                        <td>{{ member.email }}</td>
+                        <td>{{ member.homeAddress?.address}}</td>
+                        <td>
+                            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#orderDetailsModal">
+                            <u>Check Order details</u>
+                        </button>
+                        </td>
+                    </tr>
+                </tbody>
+
+                <tbody *ngIf="selectedValue==='3' && (users$ | async) as guests ">
+                    <!-- Guests Table -->
+                    <tr *ngFor="let guest of guests ">
+                        <td>{{ guest.firstName }}</td>
+                        <td>{{ guest.lastName }}</td>
+                        <td>{{ guest.email }}</td>
+                        <td>{{ guest.homeAddress?.address}}</td>
+                        <td>
+                            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#orderDetailsModal">
+                            <u>Check Order details</u>
+                        </button>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Modal for checking order details -->
+<div class="modal" id="orderDetailsModal" tabindex="-1" aria-labelledby="Order details" role="dialog" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content ">
+            <div class="modal-header ">
+                <h4 class="modal-title " id="exampleModalLabel ">Order Details</h4>
+                <button type="button " class="btn-close " data-bs-dismiss="modal " aria-label="Close ">
+          <span aria-hidden="true ">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body ">
+                <!-- Order Table -->
+                <table class="table table-hover table-stripped table-responsive ">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Order Date</th>
+                            <th>Product Title</th>
+                            <th>Product Quantity</th>
+                            <th>Payment Method</th>
+                            <th>Payment Status</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="orders?.length !== 0">
+                        <ng-container *ngFor="let user of users">
+                            <div *ngFor="let order of orders">
+
+                                <ng-container *ngIf="order.accountInfoId === user.accountInfo?.id">
+                                    <!---    <div> Debug: {{order.accountInfoId }} !== {{user.accountInfo?.id}} </div>--->
+
+                                    <tr>
+                                        <td>{{ order.id }}</td>
+                                        <td>{{ order.orderDate | date: 'dd-MM-yy' }}</td>
+                                        <td>
+                                            <div *ngFor="let orderDetail of order.orderDetails">
+                                                {{ orderDetail.productTitle }}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div *ngFor="let orderDetail of order.orderDetails">
+                                                {{ orderDetail.quantity }}
+                                            </div>
+                                        </td>
+                                        <td>{{ order.paymentMethod }}</td>
+                                        <td>{{ order.status }}</td>
+                                    </tr>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>

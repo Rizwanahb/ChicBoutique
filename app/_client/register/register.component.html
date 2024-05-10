@@ -1,0 +1,130 @@
+<div class="container">
+    <div class="card mx-auto" style="max-width: 600px; margin-top:45px; ">
+        <div class="card-body">
+            <h3 class="card-title mb-4">Registration Form</h3>
+            <div class="message text-danger mt-4">
+                {{ signupMessage }}
+            </div>
+
+            <hr>
+            <form [formGroup]="RegisterForm" (ngSubmit)="save()">
+                <!-- Email -->
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                    </div>
+                    <input formControlName="email" class=" form-control" type="email" placeholder="Email " required>
+                    <small class="text-danger" *ngIf="RegisterForm.get( 'email')?.hasError( 'required') && RegisterForm.get( 'email')?.touched ">*Email is required.</small>
+                    <small class="text-danger" *ngIf="RegisterForm.get( 'email')?.hasError( 'emailError') && RegisterForm.get( 'email')?.touched ">*Email format is invalid.</small>
+                </div>
+
+                <!-- First Name -->
+                <div class="form-group input-group ">
+                    <div class="input-group-prepend ">
+                        <span class="input-group-text ">
+                    <i class="fas fa-user "></i>
+                  </span>
+                    </div>
+                    <input formControlName="firstName" class="form-control " type="text " placeholder="First Name " required>
+                    <small class="text-danger " *ngIf="RegisterForm.get( 'firstName')?.hasError( 'required') && RegisterForm.get( 'firstName')?.touched ">*First Name is required.</small>
+                </div>
+
+                <!-- Last Name -->
+                <div class="form-group input-group ">
+                    <div class="input-group-prepend ">
+                        <span class="input-group-text ">
+                    <i class="fas fa-user "></i>
+                  </span>
+                    </div>
+                    <input formControlName="lastName" class="form-control " type="text " placeholder="Last Name " required>
+                    <small class="text-danger " *ngIf="RegisterForm.get( 'lastName')?.hasError('required') && RegisterForm.get( 'lastName')?.touched ">*Last Name is required.</small>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group input-group ">
+                    <div class="input-group-prepend ">
+                        <span class="input-group-text ">
+                    <i class="fas fa-key "></i>
+                  </span>
+                    </div>
+                    <input formControlName="password" class="form-control " type="password" placeholder="Password " required>
+                    <small class="text-danger " *ngIf="RegisterForm.get( 'password')?.hasError( 'required') && RegisterForm.get( 'password')?.touched ">*Password is required.</small>
+                    <small class="text-danger " *ngIf="RegisterForm.get( 'password')?.hasError( 'minlength') && RegisterForm.get( 'password')?.touched ">*Password must be at least 6 characters.</small>
+                </div>
+
+                <!-- Address -->
+                <div class="form-group input-group ">
+                    <div class="input-group-prepend ">
+                        <span class="input-group-text ">
+                    <i class="fas fa-home "></i>
+                  </span>
+                    </div>
+                    <input formControlName="address" class="form-control" type="text" placeholder="Address " required>
+                </div>
+
+                <!-- City -->
+                <div class="form-group input-group ">
+                    <div class="input-group-prepend ">
+                        <span class="input-group-text ">
+                    <i class="fas fa-city "></i>
+                  </span>
+                    </div>
+                    <input formControlName="city" class="form-control " type="text " placeholder="City " required>
+
+                    <!--   <small class="text-danger" *ngIf="RegisterForm.get('city')?.hasError('pattern') && RegisterForm.get('city')?.touched">*Invalid city.</small>-->
+                </div>
+
+                <!-- Postal Code -->
+                <div class="form-group input-group ">
+                    <div class="input-group-prepend ">
+                        <span class="input-group-text ">
+                    <i class="fas fa-map-marker-alt "></i>
+                  </span>
+                    </div>
+                    <input formControlName="postalcode" class="form-control " type="text " placeholder="Postal Code " required>
+                    <small class="text-danger " *ngIf="RegisterForm.get( 'postalcode')?.hasError( 'required') && RegisterForm.get( 'postalcode')?.touched ">*Postalcode is required.</small>
+                    <small class="text-danger " *ngIf="RegisterForm.get( 'postalcode')?.hasError( 'pattern') && RegisterForm.get( 'postalcode')?.touched ">*Invalid Postalcode</small>
+                </div>
+
+                <!-- Country -->
+                <div class="form-group input-group ">
+                    <div class="input-group-prepend ">
+                        <span class="input-group-text ">
+                    <i class="fas fa-globe "></i>
+                  </span>
+                    </div>
+                    <input formControlName="country" class="form-control " type="text " placeholder="Country" required>
+                    <small class="text-danger" *ngIf="RegisterForm.get('country')?.hasError('pattern') && RegisterForm.get('country')?.touched">*Invalid country.</small>
+                </div>
+
+                <!-- Country Code and Telephone Number -->
+                <div class="form-row">
+                    <div class="form-group col-md-14">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                          <i class="fas fa-phone"></i>
+                                </span>
+                            </div>
+                            <select formControlName="countryCode" class="form-select" [(ngModel)]="selectedCountryCode">
+                            <option *ngFor=" let code of countryCodes" [value]="code">{{code}}</option>
+                            </select>
+                            <input formControlName="telephone" class="form-control " style="width:250px" placeholder="Phone number " required>
+                        </div>
+                        <small class="text-danger " *ngIf="RegisterForm.get('telephone')?.hasError( 'pattern') && RegisterForm.get( 'telephone')?.touched ">*Invalid Phone number.</small>
+                    </div>
+                </div>
+
+                <br>
+                <div class="form-group ">
+                    <button type="submit " class="btn btn-success btn-block fs-5 " [disabled]="RegisterForm.invalid ">Register</button>
+                    <button type="button " class="btn btn-danger btn-block fs-5 " (click)="cancel() ">Cancel</button>
+                </div>
+            </form>
+
+            <div>
+                <p>Already have an account?
+                    <a routerLink="/login">Sign in</a>.</p>
+            </div>

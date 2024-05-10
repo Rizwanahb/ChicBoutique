@@ -1,0 +1,91 @@
+<div class="container">
+
+
+
+
+
+
+
+<br>
+<br>
+<br>
+
+<br>
+<br>
+
+<div class="container">
+    <h1>Thank you for your order!</h1>
+
+  <button type="checkbox" class="btn btn-success" (click)="detail()">See Detail</button>
+
+    <div class="row container-fluid"  *ngIf="isShown">
+        <div class="row container-fluid">
+         <ng-container >
+             <table class="table">
+                 <thead>
+                     <tr>
+                         <th scope="col">#</th>
+                         
+                         <th scope="col">Order ID</th>
+                        
+                         
+                         
+                        
+                     </tr>
+                  
+                 </thead>
+                 <tbody>
+                     <tr  >
+                         <th scope="row">1</th>
+                     
+                         <td>{{orderResponse.id}}</td>
+                        
+                         
+                     </tr>
+                 </tbody>
+ 
+                 <thead>
+                     <tr>
+                         <th scope="col">Product Title</th>
+                         <th scope="col">Product Price</th>
+                         <th scope="col">Quantity</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     
+ 
+                     <tr *ngFor="let product of orderResponse.orderDetails">
+                         <td>{{product.productTitle}}</td>
+                         <td>{{product.productPrice}}</td>
+                         <td>{{product.quantity}}</td>
+                     </tr>
+                     
+                 </tbody>
+                 <h2>Shipping Details</h2>
+                 <thead>
+                     <tr>
+                         <th scope="col">Address</th>
+                         <th scope="col">City</th>
+                        
+                         <th scope="col">PostalCode</th>
+                         <th scope="col">Country</th>
+                         <th scope="col">Telephone</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     
+ 
+                     <tr >
+                         <td>{{shippingdetails.address}}</td>
+                         <td>{{shippingdetails.city}}</td>
+                       
+                         <td>{{shippingdetails.postalCode}}</td>
+                         <td>{{shippingdetails.country}}</td>
+                         <td>{{shippingdetails.phone}}</td>
+                     </tr> 
+                     
+                 </tbody>
+             </table>
+             </ng-container>
+     </div>  
+ </div>

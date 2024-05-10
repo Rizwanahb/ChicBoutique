@@ -1,0 +1,61 @@
+<div class="container">
+
+    <h1 class=" h3 mb-5 mt-3 "> Payment Page</h1>
+
+    <!---Right-->
+    <div class="p-5 ">
+        <div class="mx-auto p-3 ">
+
+            <h2>Order Summary</h2>
+            <!--  <div class=" row mb-3 ">
+                <div class="col-5 "> Delivery Address</div>
+                <div class="col-7 ">
+
+
+                    <table class="w3-table w3-bordered w3-striped ">
+                        <tbody>
+                            <tr>
+                                <th>Address</th>
+                                <th>City</th>
+                                <th>Country</th>
+                                <th>PostalCode</th>
+                                <th>TelePhone Number</th>
+
+                            </tr>
+                            <tr>
+
+                                <td>{{ shippingdetails}}</td>
+                                <td>{{ shippingdetails.city }}</td>
+                                <td>{{ shippingdetails.country }}</td>
+                                <td>{{ shippingdetails.postalcode }}</td>
+                                <td>{{ shippingdetails.phone }}</td>
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>-->
+            <div class="row mb-3 ">
+                <div class="col-5 "> Total Amount
+                    <span>TOTAL</span> <strong class="text-dark ">{{cartTotal}} DKK</strong>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- PayPal Integration Section -->
+        <div id="notification-container card-container">
+            <!-- Cancel Button -->
+            <div class="back" (click)="cancel()">Cancel</div>
+
+            <!-- PayPal Button and Ngx-Paypal Component -->
+            <div id="paypal-button-container"></div>
+            <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+        </div>
+
+
+    </div>
+</div>
